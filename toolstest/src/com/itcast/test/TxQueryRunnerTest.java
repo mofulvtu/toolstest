@@ -11,6 +11,7 @@ import org.apache.commons.dbutils.handlers.MapListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.junit.Test;
 
+import cn.itcast.commons.CommonUtils;
 import cn.itcast.jdbc.JdbcUtils;
 import cn.itcast.jdbc.TxQueryRunner;
 
@@ -158,6 +159,39 @@ public class TxQueryRunnerTest {
 		Long sum1 = number.longValue();
 		System.out.println(sum);//5
 		System.out.println(sum1);//5
+	}
+	
+	/**
+	 * 一行结果中包含了两张表的列
+	 * 使用MapHandler处理
+	 * 1.把结果集封装到map中
+	 * 2.使用map生成Person对象
+	 * 3.使用map生成address对象
+	 * 4.把两个实体对象建立关系 
+	 */
+	@Test
+	public void testQuery6() throws Exception {
+		String sql = "SELECT * FROM person p, address a WHERE p.pid=a.aid AND p.pid=?";//结果集是单行单列
+		QueryRunner qr = new TxQueryRunner();
+		/* 
+		 * 1.得到Map
+		 */
+		Map<String, Object> map = qr.query(sql, new MapHandler(),1);
+		/*
+		 * 2.把Map中部分数据封装到Person中
+		 */
+		Person p = CommonUtils.toBean(map, Person.class);
+		/*
+		 * 3.把Map中部分数据封装到Address中
+		 */
+		Address addr = CommonUtils.toBean(map, Address.class);
+		/*
+		 * 4.建立两个实体的关系
+		 */
+		p.setAddress(addr);
+		
+		System.out.println(p);
+		
 	}
 	
 	

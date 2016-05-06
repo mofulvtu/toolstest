@@ -7,6 +7,16 @@ public class Person {
 	private Integer age;
 	private String sex;
 
+	private Address address;
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
 	public Integer getPid() {
 		return pid;
 	}
@@ -42,7 +52,7 @@ public class Person {
 	@Override
 	public String toString() {
 		return "Person [pid=" + pid + ", pname=" + pname + ", age=" + age
-				+ ", sex=" + sex + "]";
+				+ ", sex=" + sex + ", address=" + address + "]";
 	}
 
 	public Person() {
@@ -50,12 +60,14 @@ public class Person {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Person(Integer pid, String pname, Integer age, String sex) {
+	public Person(Integer pid, String pname, Integer age, String sex,
+			Address address) {
 		super();
 		this.pid = pid;
 		this.pname = pname;
 		this.age = age;
 		this.sex = sex;
+		this.address = address;
 	}
 
 }
