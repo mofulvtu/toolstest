@@ -191,7 +191,8 @@ public class TxQueryRunnerTest {
 		p.setAddress(addr);
 		
 		System.out.println(p);
-		
+		//Person [pid=1, pname=p1, age=12, sex=男, address=Address [aid=1, province=北京, city=北京, street=北三环]]
+
 	}
 	
 	
